@@ -23,7 +23,7 @@ func main() {
 	repo := flag.String("repo", ".", "path to git repo (used to resolve commit URLs)")
 
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, `nfty-test — push notifications via ntfy
+		fmt.Fprintf(os.Stderr, `ntfy-test — push notifications via ntfy
 
 Reads messages from stdin. Sends one notification per line, or use -batch to
 combine all input into a single notification.
@@ -33,9 +33,9 @@ click URL pointing to the commit on GitHub or Gitea (auto-detected from
 the git remote).
 
 Usage:
-  echo "hello" | nfty-test -topic <topic>
-  git log --oneline -3 | nfty-test -topic <topic> -batch -title "Commits"
-  git -C /path/to/repo log --oneline -1 | nfty-test -topic <topic> -repo /path/to/repo
+  echo "hello" | ntfy-test -topic <topic>
+  git log --oneline -3 | ntfy-test -topic <topic> -batch -title "Commits"
+  git -C /path/to/repo log --oneline -1 | ntfy-test -topic <topic> -repo /path/to/repo
 
 Options:
 `)

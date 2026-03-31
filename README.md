@@ -1,4 +1,4 @@
-# nfty-test
+# ntfy-test
 
 A Go CLI that sends push notifications to your team's phones using [ntfy](https://ntfy.sh). Pipe in commit logs, alerts, or any text — your team gets notified instantly.
 
@@ -51,8 +51,8 @@ If you don't want to install the app, open `https://ntfy.sh/your-topic-name` in 
 
 ```bash
 git clone <this-repo>
-cd nfty-test
-go build -o nfty-test .
+cd ntfy-test
+go build -o ntfy-test .
 ```
 
 ### Basic usage
@@ -60,13 +60,13 @@ go build -o nfty-test .
 The tool reads from stdin and sends each line as a notification:
 
 ```bash
-echo "deploy complete" | ./nfty-test -topic myteam-alerts-2026
+echo "deploy complete" | ./ntfy-test -topic myteam-alerts-2026
 ```
 
 ### Send with a title and priority
 
 ```bash
-echo "prod is down" | ./nfty-test -topic myteam-alerts-2026 \
+echo "prod is down" | ./ntfy-test -topic myteam-alerts-2026 \
   -title "ALERT" \
   -priority max \
   -tags rotating_light
@@ -79,13 +79,13 @@ Priority levels: `min`, `low`, `default`, `high`, `max`
 Each commit is sent as a separate notification. Tapping the notification opens the commit on GitHub or Gitea (auto-detected from the git remote):
 
 ```bash
-git log --oneline -5 | ./nfty-test -topic myteam-alerts-2026 -repo /path/to/repo
+git log --oneline -5 | ./ntfy-test -topic myteam-alerts-2026 -repo /path/to/repo
 ```
 
 ### Batch multiple lines into one notification
 
 ```bash
-git log --oneline -5 | ./nfty-test -topic myteam-alerts-2026 \
+git log --oneline -5 | ./ntfy-test -topic myteam-alerts-2026 \
   -batch \
   -repo /path/to/repo \
   -title "Recent Commits"
@@ -96,7 +96,7 @@ git log --oneline -5 | ./nfty-test -topic myteam-alerts-2026 \
 Manually set a URL that opens when the notification is tapped:
 
 ```bash
-echo "PR ready for review" | ./nfty-test -topic myteam-alerts-2026 \
+echo "PR ready for review" | ./ntfy-test -topic myteam-alerts-2026 \
   -click https://github.com/org/repo/pull/42
 ```
 
@@ -107,7 +107,7 @@ When piping `git log --oneline`, the click URL is set automatically — no `-cli
 Add buttons to the notification:
 
 ```bash
-echo "build failed" | ./nfty-test -topic myteam-alerts-2026 \
+echo "build failed" | ./ntfy-test -topic myteam-alerts-2026 \
   -actions "view, Open CI, https://ci.example.com/build/123; view, View Logs, https://ci.example.com/logs/123"
 ```
 
@@ -116,7 +116,7 @@ echo "build failed" | ./nfty-test -topic myteam-alerts-2026 \
 The tool echoes messages to stdout, so it works in pipelines:
 
 ```bash
-git log --oneline -3 | ./nfty-test -topic myteam-alerts-2026 -repo . | tee notification-log.txt
+git log --oneline -3 | ./ntfy-test -topic myteam-alerts-2026 -repo . | tee notification-log.txt
 ```
 
 ### All flags
@@ -138,5 +138,5 @@ git log --oneline -3 | ./nfty-test -topic myteam-alerts-2026 -repo . | tee notif
 If you need more than 250 messages/day or want private topics, ntfy is open source and can be self-hosted. Point the `-server` flag at your instance:
 
 ```bash
-echo "hello" | ./nfty-test -topic alerts -server https://ntfy.internal.example.com
+echo "hello" | ./ntfy-test -topic alerts -server https://ntfy.internal.example.com
 ```
